@@ -25,7 +25,7 @@ type Articles struct {
 func main() {
 	e := echo.New()
 	e.Use(middleware.CORSWithConfig(middleware.CORSConfig{
-		AllowOrigins: []string{os.Getenv("FRONTEND_URL")},
+		AllowOrigins: []string{"*"},
 		AllowMethods: []string{"GET"},
 		AllowCredentials: true,
 	}))
