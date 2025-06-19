@@ -9,10 +9,11 @@ interface Data {
 function App() {
   const [articles, setArticles] = useState<Data[]>([]);
   const [count, setCount] = useState<number>(0);
+  const backendURL = import.meta.env.VITE_BACKEND_URL;
 
   useEffect(() => {
     axios
-      .get("http://localhost:8081")
+      .get(backendURL)
       .then((res) => {
         setArticles(res.data.articles);
         setCount(res.data.articles.length);
