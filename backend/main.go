@@ -3,13 +3,11 @@ package main
 import (
 	"encoding/json"
 	"io"
-	"log"
 	"net/http"
 	"os"
 	"sort"
 	"time"
 
-	"github.com/joho/godotenv"
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
 )
@@ -24,16 +22,10 @@ type Articles struct {
 	Articles []Article `json:"articles"`
 }
 
-func init() {
-	if err := godotenv.Load(); err != nil {
-		log.Fatal(err)
-	}
-}
-
 func main() {
 	e := echo.New()
 	e.Use(middleware.CORSWithConfig(middleware.CORSConfig{
-		AllowOrigins: []string{"http://localhost:5174"},
+		AllowOrigins: []string{os.Getenv("FRONTEND_URL")},
 		AllowMethods: []string{"GET"},
 		AllowCredentials: true,
 	}))
