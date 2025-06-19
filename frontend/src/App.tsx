@@ -3,6 +3,7 @@ import axios from "axios";
 
 interface Data {
   title: string;
+  path: string;
   published_at: string;
 }
 
@@ -48,7 +49,12 @@ function App() {
                   {index + 1}
                 </td>
                 <td className="border border-gray-300 px-4 py-2">
-                  {article.title}
+                  <a
+                    href={`https://zenn.dev/${article.path}`}
+                    className="text-black hover:underline hover:text-blue-600"
+                  >
+                    {article.title}
+                  </a>
                 </td>
                 <td className="border border-gray-300 px-4 py-2">
                   {article.published_at.slice(0, 10)}
