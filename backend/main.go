@@ -16,7 +16,7 @@ type Article struct {
 	Title       string    `json:"title"`
 	PublishedAt time.Time `json:"published_at"`
 	Path        string    `json:"path"`
-	LikedCount  int
+	LikedCount  int       `json:"liked_count"`
 }
 
 type Articles struct {
