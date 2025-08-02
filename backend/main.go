@@ -16,6 +16,7 @@ type Article struct {
 	Title       string    `json:"title"`
 	PublishedAt time.Time `json:"published_at"`
 	Path        string    `json:"path"`
+	LikedCount  int
 }
 
 type Articles struct {
@@ -25,8 +26,8 @@ type Articles struct {
 func main() {
 	e := echo.New()
 	e.Use(middleware.CORSWithConfig(middleware.CORSConfig{
-		AllowOrigins: []string{"*"},
-		AllowMethods: []string{"GET"},
+		AllowOrigins:     []string{"*"},
+		AllowMethods:     []string{"GET"},
 		AllowCredentials: true,
 	}))
 	e.GET("/", func(c echo.Context) error {
