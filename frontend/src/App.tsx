@@ -4,6 +4,7 @@ import axios from "axios";
 interface Data {
   title: string;
   path: string;
+  liked_count: number
   published_at: string;
 }
 
@@ -38,6 +39,9 @@ function App() {
                 タイトル
               </th>
               <th className="border border-gray-300 px-4 py-2 text-left">
+                いいね数
+              </th>
+              <th className="border border-gray-300 px-4 py-2 text-left">
                 公開日
               </th>
             </tr>
@@ -55,6 +59,9 @@ function App() {
                   >
                     {article.title}
                   </a>
+                </td>
+                <td className="border border-gray-300 px-4 py-2">
+                  {article.liked_count}
                 </td>
                 <td className="border border-gray-300 px-4 py-2">
                   {article.published_at.slice(0, 10)}
