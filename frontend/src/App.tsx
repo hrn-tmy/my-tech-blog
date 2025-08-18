@@ -72,6 +72,8 @@ function App() {
                 <td className="border border-gray-300 px-4 py-2">
                   <a
                     href={`https://zenn.dev/${article.path}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="text-black underline hover:text-blue-600"
                   >
                     {article.title}
