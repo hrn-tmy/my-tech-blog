@@ -25,7 +25,7 @@ function App() {
         setCount(res.data.articles.length);
         const totalLikes = res.data.articles.reduce(
           (sum: number, article: Data) => sum + article.liked_count,
-          -1
+          0
         );
         setLikeSum(totalLikes);
         setIsLoading(true);
