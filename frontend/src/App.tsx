@@ -24,13 +24,10 @@ function App() {
     axios
       .get(backendURL, { params: { page: currentPage, limit: itemsPerPage } })
       .then((res) => {
+        console.log(res);
         setArticles(res.data.articles);
         setCount(res.data.count);
-        const totalLikes = res.data.articles.reduce(
-          (sum: number, article: Data) => sum + article.liked_count,
-          0
-        );
-        setLikeSum(totalLikes);
+        setLikeSum(res.data.total_likes);
         setIsLoading(true);
       })
       .catch((err) => {

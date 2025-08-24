@@ -72,7 +72,14 @@ func main() {
 		if offset < len(articles.Articles) {
 			pagedArticle = articles.Articles[offset:end]
 		}
+
+		totalLikes := 0
+		for _, a := range articles.Articles {
+			totalLikes += a.LikedCount
+		}
+
 		return c.JSON(http.StatusOK, map[string]any{
+			"total_likes": totalLikes,
 			"articles": pagedArticle,
 			"count": len(articles.Articles),
 		})
