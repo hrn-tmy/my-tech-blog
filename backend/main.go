@@ -6,6 +6,7 @@ import (
 	"net/http"
 	"os"
 	"sort"
+	"strconv"
 	"time"
 
 	"github.com/labstack/echo/v4"
@@ -49,7 +50,29 @@ func main() {
 		sort.Slice(articles.Articles, func(i, j int) bool {
 			return articles.Articles[i].PublishedAt.Before(articles.Articles[j].PublishedAt)
 		})
-		return c.JSON(http.StatusOK, articles)
+
+		page, err := strconv.Atoi("page")
+		if err != nil {
+			return c.JSON(http.StatusInternalServerError, err.Error())
+		}
+		limit, err := strconv.Atoi("limit")
+		if err != nil {
+			return c.JSON(http.StatusInternalServerError, err.Error())
+		}
+		if page < 1 {
+			page = 1
+		}
+		if limit < 1 {
+			limit = 20
+		}
+		offset := (page - 1) * limit
+		end := min(offset + limit, len(articles.Articles))
+
+		var pagedArticle []Article
+		if offset < len(articles.Articles) {
+			pagedArticle = articles.Articles[offset:end]
+		}
+		return c.JSON(http.StatusOK, pagedArticle)
 	})
 
 	e.Logger.Fatal(e.Start(":8081"))
