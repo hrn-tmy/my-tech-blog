@@ -22,7 +22,7 @@ function App() {
 
   useEffect(() => {
     axios
-      .get(backendURL)
+      .get(backendURL, { params: { page: currentPage, limit: itemsPerPage } })
       .then((res) => {
         setArticles(res.data.articles);
         setCount(res.data.articles.length);
