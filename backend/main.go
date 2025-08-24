@@ -72,7 +72,10 @@ func main() {
 		if offset < len(articles.Articles) {
 			pagedArticle = articles.Articles[offset:end]
 		}
-		return c.JSON(http.StatusOK, pagedArticle)
+		return c.JSON(http.StatusOK, map[string]any{
+			"articles": pagedArticle,
+			"count": len(articles.Articles),
+		})
 	})
 
 	e.Logger.Fatal(e.Start(":8081"))

@@ -25,7 +25,7 @@ function App() {
       .get(backendURL, { params: { page: currentPage, limit: itemsPerPage } })
       .then((res) => {
         setArticles(res.data.articles);
-        setCount(res.data.articles.length);
+        setCount(res.data.count);
         const totalLikes = res.data.articles.reduce(
           (sum: number, article: Data) => sum + article.liked_count,
           0
