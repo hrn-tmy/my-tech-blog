@@ -15,7 +15,10 @@ function App() {
   const [count, setCount] = useState<number>(0);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [likeSum, setLikeSum] = useState<number>(0);
+  const [currentPage, setCurrentPage] = useState<number>(1);
   const backendURL = import.meta.env.VITE_BACKEND_URL;
+  const itemsPerPage = 20;
+  const totalPages = Math.ceil(count / itemsPerPage);
 
   useEffect(() => {
     axios
@@ -89,6 +92,33 @@ function App() {
             ))}
           </tbody>
         </table>
+        <div className="flex justify-center mt-4 gap-2">
+          <button
+            onClick={() => setCurrentPage((p) => Math.max(p - 1, 1))}
+            disabled={currentPage === 1}
+            className="px-3 py-1 border rounded disabled:opacity-50"
+          >
+            前
+          </button>
+          {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+            <button
+              key={page}
+              onClick={() => setCurrentPage(page)}
+              className={`px-3 py-1 border rounded ${
+                currentPage === page ? "bg-blue-500 text-white" : ""
+              }`}
+            >
+              {page}
+            </button>
+          ))}
+          <button
+            onClick={() => setCurrentPage((p) => Math.min(p + 1, totalPages))}
+            disabled={currentPage === totalPages}
+            className="px-3 py-1 border rounded disabled:opacity-50"
+          >
+            次
+          </button>
+        </div>
       </div>
     </div>
   );
