@@ -51,11 +51,11 @@ func main() {
 			return articles.Articles[i].PublishedAt.Before(articles.Articles[j].PublishedAt)
 		})
 
-		page, err := strconv.Atoi("page")
+		page, err := strconv.Atoi(c.QueryParam("page"))
 		if err != nil {
 			return c.JSON(http.StatusInternalServerError, err.Error())
 		}
-		limit, err := strconv.Atoi("limit")
+		limit, err := strconv.Atoi(c.QueryParam("limit"))
 		if err != nil {
 			return c.JSON(http.StatusInternalServerError, err.Error())
 		}
