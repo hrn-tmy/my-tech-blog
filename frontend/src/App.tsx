@@ -36,7 +36,7 @@ function App() {
       .catch((err) => {
         console.error(err);
       });
-  }, []);
+  }, [currentPage]);
 
   return !isLoading ? (
     <div className="flex items-center justify-center h-screen w-screen bg-gray-50">
