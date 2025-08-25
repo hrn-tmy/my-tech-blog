@@ -49,9 +49,6 @@ function App() {
         <table className="min-w-full table-auto border-collapse border border-gray-300">
           <thead>
             <tr className="bg-gray-100">
-              <th className="border border-gray-300 px-2 py-2 text-left">
-                No.
-              </th>
               <th className="border border-gray-300 px-4 py-2 text-left">
                 タイトル
               </th>
@@ -66,9 +63,6 @@ function App() {
           <tbody>
             {articles.map((article, index) => (
               <tr key={index} className="hover:bg-gray-50">
-                <td className="border border-gray-300 px-4 py-2">
-                  {index + 1}
-                </td>
                 <td className="border border-gray-300 px-4 py-2">
                   <a
                     href={`https://zenn.dev/${article.path}`}
@@ -93,7 +87,7 @@ function App() {
           <button
             onClick={() => setCurrentPage((p) => Math.max(p - 1, 1))}
             disabled={currentPage === 1}
-            className="px-3 py-1 border rounded disabled:opacity-50"
+            className="px-3 py-1 border rounded disabled:opacity-50 hover:"
           >
             前
           </button>
