@@ -51,11 +51,20 @@ func main() {
 			return articles.Articles[i].PublishedAt.Before(articles.Articles[j].PublishedAt)
 		})
 
-		page, err := strconv.Atoi(c.QueryParam("page"))
-		if err != nil {
-			return c.JSON(http.StatusInternalServerError, err.Error())
+		pageStr := c.QueryParam("page")
+		if pageStr == "" {
+			pageStr = "1"
 		}
-		limit, err := strconv.Atoi(c.QueryParam("limit"))
+		page, err := strconv.Atoi(pageStr)
+		if err != nil {
+			return c.JSON(http.StatusBadRequest, map[string]string{"error": "invalid page parameter"})
+		}
+
+		limitStr := c.QueryParam("limit")
+		if limitStr == "" {
+			limitStr = "20"
+		}
+		limit, err := strconv.Atoi(limitStr)
 		if err != nil {
 			return c.JSON(http.StatusInternalServerError, err.Error())
 		}
